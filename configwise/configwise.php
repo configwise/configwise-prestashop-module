@@ -167,12 +167,12 @@ class Configwise extends Module
                             array(
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->l('Enabled')
+                                'label' => $this->l('Yes')
                             ),
                             array(
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->l('Disabled')
+                                'label' => $this->l('No')
                             )
                         ),
                     ),
@@ -190,26 +190,6 @@ class Configwise extends Module
                                 array(
                                     'id' => self::CONFIGWISE_PRODUCT_ATTR_ID_PRODUCT,
                                     'name' => 'Product ID'
-                                ),
-                            ),
-                            'id' => 'id',
-                            'name' => 'name',
-                        )
-                    ),
-                    array(
-                        'label' => $this->l('Language'),
-                        'name' => 'CONFIGWISE_LANGUAGE',
-                        'required' => true,
-                        'type' => 'select',
-                        'options' => array(
-                            'query' => array(
-                                array(
-                                    'id' => self::CONFIGWISE_LANGUAGE_EN,
-                                    'name' => 'English'
-                                ),
-                                array(
-                                    'id' => self::CONFIGWISE_LANGUAGE_NL,
-                                    'name' => 'Dutch'
                                 ),
                             ),
                             'id' => 'id',
@@ -259,7 +239,6 @@ class Configwise extends Module
             'CONFIGWISE_PRODUCT_ATTR' => Configuration::get('CONFIGWISE_PRODUCT_ATTR'),
             'CONFIGWISE_DOMAIN' => Configuration::get('CONFIGWISE_DOMAIN'),
             'CONFIGWISE_COMPANY_REFERENCE_NUMBER' => Configuration::get('CONFIGWISE_COMPANY_REFERENCE_NUMBER'),
-            'CONFIGWISE_LANGUAGE' => Configuration::get('CONFIGWISE_LANGUAGE'),
         );
     }
 
@@ -326,7 +305,7 @@ class Configwise extends Module
             if (!$configWiseProduct->active) {
                 return;
             }
-            if (!empty($configWiseProduct->value)) {
+            if ($configWiseProduct->active_override) {
                 $product_id = $configWiseProduct->value;
             }
         }
@@ -337,7 +316,7 @@ class Configwise extends Module
             'product_id' => $product_id,
             'domain' => Configuration::get('CONFIGWISE_DOMAIN'),
             'company_product_number' => Configuration::get('CONFIGWISE_COMPANY_REFERENCE_NUMBER'),
-            'language' => Configuration::get('CONFIGWISE_LANGUAGE'),
+            'language' => $this->context->language->iso_code,
         ]);
 
         return $this->display(__FILE__, 'views/templates/front/configwise.tpl');
@@ -346,15 +325,18 @@ class Configwise extends Module
     public function hookDisplayAdminProductsExtra($params)
     {
         $use = true;
+        $activeOverride = false;
         $product_id = '';
         $idProduct = $params['id_product'];
         if ($configWiseProduct = ConfigwiseProduct::getByProductId($idProduct)) {
             $product_id = $configWiseProduct->value;
             $use = (bool)$configWiseProduct->active;
+            $activeOverride = (bool)$configWiseProduct->active_override;
         }
         $this->context->smarty->assign([
             'CONFIGWISE_USE' => $use,
             'CONFIGWISE_PRODUCT_ID' => $product_id,
+            'CONFIGWISE_ACTIVE_OVERRIDE' => $activeOverride,
         ]);
 
         return $this->display(__FILE__, 'views/templates/admin/product_form.tpl');
@@ -371,6 +353,7 @@ class Configwise extends Module
 
             $configWiseProduct->value = (string)Tools::getValue('CONFIGWISE_PRODUCT_ID');
             $configWiseProduct->active = (bool)Tools::getValue('CONFIGWISE_USE');
+            $configWiseProduct->active_override = (bool)Tools::getValue('CONFIGWISE_ACTIVE_OVERRIDE');
             $configWiseProduct->save();
         }
     }

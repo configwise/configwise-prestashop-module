@@ -25,14 +25,14 @@
 
 {if $mode}
   {if !empty($channel_id) && !empty($domain) && !empty($company_product_number) && !empty($product_id)}
-    <div id="configwise" style="height: 400px; width: 500px;">
+    <div id="configwise" style="position: relative; height: 400px;">
       <script type="text/javascript"
               src="https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id={$product_id|escape:'html':'UTF-8'}&channel_id={$channel_id|escape:'html':'UTF-8'}&domain={$domain|escape:'html':'UTF-8'}&company_reference_number={$company_product_number|escape:'html':'UTF-8'}&language={$language|escape:'html':'UTF-8'}"></script>
       <div>
   {/if}
 {else}
-    <div id="configwise" style="height: 400px; width: 500px;">
+    <div id="configwise" style="position: relative; height: 400px;">
       <script type="text/javascript"
-              src="https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=CONFIGWISE_TEST_EXAMPLE_CHAIR&channel_id=your_channel_id&domain=yourdomain.com&company_reference_number=your_companyreferencenumber&language={$language|escape:'html':'UTF-8'}"></script>
+              src="https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=CONFIGWISE_TEST_EXAMPLE_CHAIR&channel_id=fbd6bc02-1bd3-446f-9ee9-9a3412f4d064&domain=d&company_reference_number=fbd6bc02-1bd3-446f-9ee9-9a3412f4d064&language={$language|escape:'html':'UTF-8'}"></script>
       <div>
 {/if}

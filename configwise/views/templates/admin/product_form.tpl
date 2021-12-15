@@ -23,16 +23,26 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<div id="quantities" style="">
+<div id="configwise_ar">
   <h2>Settings</h2>
   <fieldset class="form-group">
     <div class="row" style="margin-bottom: 5%;">
       <div class="col-md-12">
         <label class="form-control-label">{l s='Active' mod='configwise'}</label>
-        <div class="switch-input-lg" id="CONFIGWISE_USE_SWITCH">
+        <div class="switch-input-lg" id="CONFIGWISE_USE">
           <input class="switch-input-lg" id="CONFIGWISE_USE"
                  data-toggle="switch" type="checkbox"
-                 name="CONFIGWISE_USE" {if $CONFIGWISE_USE}checked="checked"{/if} value="{$CONFIGWISE_USE|intval}">
+                 name="CONFIGWISE_USE" {if $CONFIGWISE_USE}checked="checked"{/if} value="1">
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 5%;">
+      <div class="col-md-12">
+        <label class="form-control-label">{l s='Override product id' mod='configwise'}</label>
+        <div class="switch-input-lg" id="CONFIGWISE_ACTIVE_OVERRIDE">
+          <input class="switch-input-lg" id="CONFIGWISE_ACTIVE_OVERRIDE"
+                 data-toggle="switch" type="checkbox"
+                 name="CONFIGWISE_ACTIVE_OVERRIDE" {if $CONFIGWISE_ACTIVE_OVERRIDE}checked="checked"{/if} value="1">
         </div>
       </div>
     </div>

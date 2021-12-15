@@ -31,8 +31,8 @@
  */
 
 $sql = array(
-    'DROP TABLE IF EXISTS configwise_products',
-    'DROP TABLE IF EXISTS configwise_products_shop'
+    'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'configwise_products',
+    'DROP TABLE IF EXISTS ' . _DB_PREFIX_ . 'configwise_products_shop'
 );
 
 foreach ($sql as $query) {

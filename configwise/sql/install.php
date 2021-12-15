@@ -32,6 +32,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS ' . _DB_PREFIX_ . 'configwise_products ('
     . '`id_product` INT(11) NOT NULL, '
     . '`value` CHAR(255) NOT NULL, '
     . '`active` BOOL NOT NULL, '
+    . '`active_override` BOOL NOT NULL, '
     . '`date_add` TIMESTAMP, '
     . '`date_upd` TIMESTAMP '
     . ') ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET=UTF8;';
@@ -42,6 +43,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS ' . _DB_PREFIX_ . 'configwise_products_shop
     . '`id_product` INT(11) NOT NULL, '
     . '`value` CHAR(255) NOT NULL, '
     . '`active` BOOL NOT NULL, '
+    . '`active_override` BOOL NOT NULL, '
     . 'UNIQUE KEY configwise_products_shop (`id_configwise_products`, `id_shop`) '
     . ') ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET=UTF8;';
 

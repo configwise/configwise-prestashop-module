@@ -36,6 +36,8 @@ class ConfigwiseProduct extends ObjectModel
 
     public $active;
 
+    public $active_override;
+
     /**
      * @var string $date_add
      */
@@ -71,6 +73,12 @@ class ConfigwiseProduct extends ObjectModel
                 'size' => 256
             ),
             'active' => array(
+                'type' => self::TYPE_BOOL,
+                'shop' => true,
+                'validate' => 'isBool',
+                'size' => 1
+            ),
+            'active_override' => array(
                 'type' => self::TYPE_BOOL,
                 'shop' => true,
                 'validate' => 'isBool',
