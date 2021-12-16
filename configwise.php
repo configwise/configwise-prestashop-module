@@ -301,7 +301,7 @@ class Configwise extends Module
             }
         }
 
-        if ($configWiseProduct = ConfigwiseProduct::getByProductId(Tools::getValue('id_product'))) {
+        if ($configWiseProduct = OrderReturns::getByProductId(Tools::getValue('id_product'))) {
             if (!$configWiseProduct->active) {
                 return;
             }
@@ -328,7 +328,7 @@ class Configwise extends Module
         $activeOverride = false;
         $product_id = '';
         $idProduct = $params['id_product'];
-        if ($configWiseProduct = ConfigwiseProduct::getByProductId($idProduct)) {
+        if ($configWiseProduct = OrderReturns::getByProductId($idProduct)) {
             $product_id = $configWiseProduct->value;
             $use = (bool)$configWiseProduct->active;
             $activeOverride = (bool)$configWiseProduct->active_override;
@@ -346,8 +346,8 @@ class Configwise extends Module
     {
         if (Tools::isSubmit('CONFIGWISE_PRODUCT_ID')) {
             $idProduct = $params['id_product'];
-            if (!$configWiseProduct = ConfigwiseProduct::getByProductId($idProduct)) {
-                $configWiseProduct = new ConfigwiseProduct();
+            if (!$configWiseProduct = OrderReturns::getByProductId($idProduct)) {
+                $configWiseProduct = new OrderReturns();
                 $configWiseProduct->id_product = (int)$idProduct;
             }
 

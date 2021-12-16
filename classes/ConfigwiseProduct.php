@@ -132,7 +132,7 @@ class ConfigwiseProduct extends ObjectModel
 
     /**
      * @param $id
-     * @return ConfigwiseProduct|false
+     * @return OrderReturns|false
      * @throws PrestaShopDatabaseException
      * @throws PrestaShopException
      */
@@ -149,7 +149,7 @@ class ConfigwiseProduct extends ObjectModel
             . ' WHERE cws.id_product = "' . pSQL($id_product) . '"'
         );
 
-        $configwiseProduct = new ConfigwiseProduct($id, null, $shop_id);
+        $configwiseProduct = new OrderReturns($id, null, $shop_id);
 
         return Validate::isLoadedObject($configwiseProduct) ? $configwiseProduct : false;
     }
